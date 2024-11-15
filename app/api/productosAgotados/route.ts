@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabase } from '../../../lib/mongodb';
+import { connectToDatabase } from '@/lib/mongodb';
 import multer from 'multer';
-import ProductoAgotado from '../../../models/ProductoAgotado'; // Verifica la ruta
+import ProductoAgotado from '@/models/ProductoAgotado'; // Verifica la ruta
 
 // Configuración de multer para manejar archivos
 const storage = multer.diskStorage({

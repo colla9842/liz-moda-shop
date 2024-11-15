@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabase } from '../../../lib/mongodb';
-import Categoria from '../../../models/categoria'; // Verifica la ruta del modelo
+import { connectToDatabase } from '@/lib/mongodb';
+import Categoria from '@/models/categoria'; // Verifica la ruta del modelo
 
 // Obtener todas las categorías
 export async function GET(req: Request) {

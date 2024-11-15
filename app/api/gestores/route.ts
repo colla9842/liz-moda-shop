@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import Gestor from '../../../models/Gestor'; // Verifica que la ruta sea correcta
+import Gestor from '@/models/Gestor'; // Verifica que la ruta sea correcta
 
 // Obtener todos los gestores
 export async function GET() {

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import Venta from '../../../models/Venta';
-import Producto from '../../../models/Producto'; // Asegúrate de que la ruta sea correcta
+import Venta from '@/models/Venta';
+import Producto from '@/models/Producto'; // Asegúrate de que la ruta sea correcta
 
 // Ruta para registrar una venta (POST)
 export async function POST(req) {

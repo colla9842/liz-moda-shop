@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import Usuario from '../../../../models/Usuario';  // Modelo de usuario
+import Usuario from '@/models/Usuario';  // Modelo de usuario
 import bcrypt from 'bcryptjs';  // Para comparar contraseñas
 
 // Este es el controlador POST para el login

@@ -2,13 +2,14 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Eye, EyeOff, Loader, CheckCircle } from 'lucide-react'
+import { Eye, EyeOff, Loader, CheckCircle, Import } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { deleteCookie, setCookie } from 'cookies-next'
+import Link from 'next/link'
 
 export function LoginViewComponent() {
   const [email, setEmail] = useState('')
@@ -117,9 +118,12 @@ export function LoginViewComponent() {
               ) : null}
               {isLoading ? 'Iniciando sesión...' : isSuccess ? 'Sesión iniciada' : 'Iniciar Sesión'}
             </Button>
-            <Button variant="link" className="text-sm text-primary hover:text-primary/80">
-              ¿Olvidó su contraseña?
-            </Button>
+            <Link href="/catalog">
+              <Button variant="link" className="text-sm text-primary hover:text-primary/80">
+                Catálogo
+              </Button>
+            </Link>
+            
           </CardFooter>
         </form>
       </Card>

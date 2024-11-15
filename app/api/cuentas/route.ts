@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabase } from '../../../lib/mongodb';
-import Cuenta from '../../../models/cuenta'; // Verifica la ruta del modelo
+import { connectToDatabase } from '@/lib/mongodb';
+import Cuenta from '@/models/cuenta'; // Verifica la ruta del modelo
 
 // Obtener todas las cuentas
 export async function GET(req: Request) {

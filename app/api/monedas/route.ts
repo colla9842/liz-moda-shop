@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabase } from '../../../lib/mongodb';
-import Moneda from '../../../models/Moneda'; // Verifica la ruta del modelo
+import { connectToDatabase } from '@/lib/mongodb';
+import moneda from '@/models/moneda'; // Verifica la ruta del modelo
 
 // Obtener todas las monedas
 export async function GET() {
   await connectToDatabase();
 
   try {
-    const monedas = await Moneda.find({});
+    const monedas = await moneda.find({});
     return NextResponse.json(monedas);
   } catch (error) {
     console.error('Error al obtener monedas:', error);
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const nuevaMoneda = new Moneda(body);
+    const nuevaMoneda = new moneda(body);
     await nuevaMoneda.save();
     return NextResponse.json(nuevaMoneda, { status: 201 });
   } catch (error) {

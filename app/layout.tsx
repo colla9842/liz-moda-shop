@@ -6,6 +6,8 @@ import { NavigationBarComponent } from '../components/navigation-bar';
 import Head from "next/head"; // Importar para modificar el head
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation'; // Para navegar en Next.js
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -53,7 +55,15 @@ export default function RootLayout({
   if (pathname.includes('catalog') &&  localStorage.getItem('userLoggedIn') !== 'true' ) {
     return (
       <html lang="es">
-        <body>{children}</body>
+        
+        <body>
+        <Link href="/login">
+          <Button variant="link" className="text-sm text-primary hover:text-primary/80">
+            Login
+          </Button>
+        </Link>
+        
+          {children}</body>
       </html>
     );
   }

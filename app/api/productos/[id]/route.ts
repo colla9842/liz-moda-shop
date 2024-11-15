@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabase } from '../../../../lib/mongodb';
-import Producto from '../../../../models/producto'; // Verifica la ruta
+import { connectToDatabase } from '@/lib/mongodb';
+import Producto from '@/models/producto'; // Verifica la ruta
 import { v2 as cloudinary } from 'cloudinary';
 
 // Configuración de Cloudinary

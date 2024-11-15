@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import Usuario from '../../../models/Usuario';
+import Usuario from '@/models/Usuario';
 import bcrypt from 'bcryptjs';
 
 // Crear un nuevo usuario (POST)
