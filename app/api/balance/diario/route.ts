@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabase } from '../../../../lib/mongodb';
-import Cuenta from '../../../../models/cuenta';
-import Moneda from '../../../../models/moneda';
+import { connectToDatabase } from '@/lib/mongodb';
+import Cuenta from '@/models/Cuenta';
+import Moneda from '@/models/Moneda';
 
 export async function GET() {
   await connectToDatabase();

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
-import moneda from '@/models/moneda'; // Verifica la ruta del modelo
+import moneda from '@/models/Moneda'; // Verifica la ruta del modelo
 
 // Obtener todas las monedas
 export async function GET() {

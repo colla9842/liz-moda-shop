@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { connectToDatabase } from '../../../lib/mongodb';
-import Cuenta from '@/models/cuenta'; // Verifica la ruta del modelo
-import Moneda from '@/models/moneda'; // Verifica la ruta del modelo
+import Cuenta from '@/models/Cuenta'; // Verifica la ruta del modelo
+import Moneda from '@/models/Moneda'; // Verifica la ruta del modelo
 
 // Ruta para el balance general y balance diario
 export async function GET(req: Request) {

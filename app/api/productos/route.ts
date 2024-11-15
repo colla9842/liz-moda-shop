@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
-import Producto from '@/models/producto'; // Verifica la ruta
+import Producto from '@/models/Producto'; // Verifica la ruta
 
 export async function GET(req: Request) {
   await connectToDatabase();
