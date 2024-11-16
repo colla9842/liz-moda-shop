@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Plus, Minus, DollarSign, Users, Calendar, X, Search } from 'lucide-react'
+import {  DollarSign, Users, Calendar, X, Search } from 'lucide-react'
 import Image from 'next/image'
 
 const API_BASE_URL = ''
@@ -171,7 +171,9 @@ export function AddSaleComponent() {
   }
 
   const filteredProducts = productos.filter(product =>
-    product.nombre.toLowerCase().includes(searchQuery.toLowerCase())
+    product.nombre.toLowerCase().includes(searchQuery.toLowerCase())&&
+    product.cantidad_stock >= 1 // Validación de stock
+    
   )
 
   return (

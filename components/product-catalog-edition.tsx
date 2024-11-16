@@ -26,23 +26,8 @@ export function ProductCatalogEditionComponent() {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const [productosResponse, productosAgotadosResponse] = await Promise.all([
-          api.get('/api/productos'),
-          api.get('/api/productosAgotados'),
-        ])
-
-        const productosDisponibles = productosResponse.data
-        const productosAgotados = productosAgotadosResponse.data.map(producto => ({
-          ...producto,
-          agotado: true,
-        }))
-
-        const productosCombinados = [
-          ...productosDisponibles,
-          ...productosAgotados,
-        ]
-
-        setProductos(productosCombinados)
+        const response = await api.get('/api/productos') // Obtener todos los productos
+        setProductos(response.data)
       } catch (error) {
         console.error('Error al cargar los productos:', error)
         setAlertMessage('Error al cargar los productos')
@@ -53,10 +38,9 @@ export function ProductCatalogEditionComponent() {
     fetchProductos()
   }, [])
 
-  const handleDelete = async (id, agotado) => {
+  const handleDelete = async (id) => {
     try {
-      const endpoint = agotado ? `/api/productosAgotados/${id}` : `/api/productos/${id}`
-      await api.delete(endpoint)
+      await api.delete(`/api/productos/${id}`) // Eliminar producto
       setProductos(productos.filter(producto => producto._id !== id))
       setAlertMessage('Producto eliminado exitosamente')
       setAlertType('success')
@@ -67,9 +51,8 @@ export function ProductCatalogEditionComponent() {
     }
   }
 
-  const handleEdit = (id, agotado) => {
-    const route = agotado ? `/editar-producto-agotado/${id}` : `/editar-producto/${id}`
-    router.push(route)
+  const handleEdit = (id) => {
+    router.push(`/editar-producto/${id}`) // Editar producto
   }
 
   const filterProducts = () => {
@@ -104,15 +87,21 @@ export function ProductCatalogEditionComponent() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filterProducts().map(producto => (
-            <Card key={producto._id} className={`overflow-hidden ${producto.agotado ? 'bg-red-100/50' : 'bg-white/50'} backdrop-blur-md`}>
+            <Card
+              key={producto._id}
+              className={`overflow-hidden ${producto.cantidad_stock < 1 ? 'bg-gray-200' : 'bg-white'} backdrop-blur-md`}
+            >
               <CardHeader className="p-0">
                 <div className="relative h-48 w-full">
-                  <Image
-                    src={API_BASE_URL + producto.imagen}
-                    alt={producto.nombre}
-                    layout="fill"
-                    objectFit="cover"
-                  />
+                <Image
+                            src={producto.imagen}
+                            alt={producto.nombre}
+                            layout="fill"
+                            objectFit="cover"
+                            className="transition-all hover:scale-105"
+                            unoptimized
+                            
+                          />
                 </div>
               </CardHeader>
               <CardContent className="p-4">
@@ -121,18 +110,25 @@ export function ProductCatalogEditionComponent() {
                 <p className="text-sm mb-1">Precio: ${producto.precio_venta_usd}</p>
                 <p className="text-sm mb-1">Cantidad: {producto.cantidad_stock}</p>
                 <p className="text-sm mb-2">Talla: {producto.talla}</p>
-                {producto.agotado && (
-                  <span className="inline-block bg-red-500 text-white text-xs px-2 py-1 rounded">
-                    Agotado
-                  </span>
+                {producto.cantidad_stock < 1 && (
+                  <p className="text-xs text-red-600 font-semibold">¡Producto agotado!</p>
                 )}
               </CardContent>
               <CardFooter className="flex justify-between">
-                <Button variant="outline" size="sm" onClick={() => handleEdit(producto._id, producto.agotado)}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handleEdit(producto._id)}
+                  
+                >
                   <Pencil className="mr-2 h-4 w-4" />
                   Editar
                 </Button>
-                <Button variant="destructive" size="sm" onClick={() => handleDelete(producto._id, producto.agotado)}>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  onClick={() => handleDelete(producto._id)}
+                >
                   <Trash2 className="mr-2 h-4 w-4" />
                   Eliminar
                 </Button>

@@ -3,7 +3,7 @@ import { connectToDatabase } from '@/lib/mongodb';
 import Categoria from '@/models/Categoria'; // Verifica la ruta del modelo
 
 // Obtener todas las categorías
-export async function GET(req: Request) {
+export async function GET() {
   await connectToDatabase();
 
   try {

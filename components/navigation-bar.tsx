@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Menu, X, ChevronDown, Home, FileText, DollarSign, Package, User, LogOut } from 'lucide-react'
+import { Menu, ChevronDown, Home, FileText, DollarSign, Package, User, LogOut } from 'lucide-react'
 import { deleteCookie  } from 'cookies-next'
 
 import { Button } from "@/components/ui/button"

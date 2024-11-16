@@ -3,7 +3,7 @@ import { connectToDatabase } from '@/lib/mongodb';
 import Cuenta from '@/models/Cuenta'; // Verifica la ruta del modelo
 
 // Obtener todas las cuentas
-export async function GET(req: Request) {
+export async function GET() {
   await connectToDatabase();
 
   try {

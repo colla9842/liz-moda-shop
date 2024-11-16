@@ -143,7 +143,7 @@ export function AddProductComponent() {
       
       setAlertMessage('Producto agregado exitosamente')
       setAlertType('success')
-
+      console.log(response);
       // Limpiar el formulario
       setNombre('')
       setPrecioVentaUsd(0)

@@ -6,8 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog"
 import { Search, ShoppingCart, X } from 'lucide-react'
 import Image from 'next/image'
 
@@ -82,9 +81,12 @@ export function ProductCatalogComponent() {
 
   const filterProducts = (productsArray) => {
     return productsArray.filter(product =>
-      product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+      product.nombre.toLowerCase().includes(searchTerm.toLowerCase())&&
+      product.cantidad_stock >= 1 // Validación de stock
     )
   }
+
+  
 
   const handleImageError = (productId) => {
     setImageError(prev => ({ ...prev, [productId]: true }))
@@ -139,11 +141,12 @@ export function ProductCatalogComponent() {
                           onClick={() => handleImageClick(API_BASE_URL + filteredProduct.imagen)}
                         >
                           <Image
-                            src={filteredProduct.imagen && !imageError[filteredProduct._id] ? API_BASE_URL + filteredProduct.imagen : '/placeholder.svg'}
+                            src={filteredProduct.imagen && !imageError[filteredProduct._id] ? filteredProduct.imagen :filteredProduct.imagen}
                             alt={filteredProduct.nombre}
                             layout="fill"
                             objectFit="cover"
                             className="transition-all hover:scale-105"
+                            unoptimized
                             onError={() => handleImageError(filteredProduct._id)}
                           />
                         </div>

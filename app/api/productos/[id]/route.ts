@@ -3,6 +3,16 @@ import { connectToDatabase } from '@/lib/mongodb';
 import Producto from '@/models/Producto'; // Verifica la ruta
 import { v2 as cloudinary } from 'cloudinary';
 
+interface ProductoUpdateData {
+  nombre: string | null;
+  descripcion: string;
+  precio_venta_usd: number | null;
+  cantidad_stock: number | null;
+  talla: string | null;
+  categoria: string | null;
+  imagen: string | null;
+}
+
 // Configuración de Cloudinary
 cloudinary.config({
   cloud_name: "du3ycwhmx",
@@ -34,14 +44,14 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 
   try {
     const formData = await request.formData();
-    const updateData: any = {
-      nombre: formData.get('nombre'),
+    const updateData: ProductoUpdateData = {
+      nombre: formData.get('nombre') as string | null,
       descripcion: 'Prenda',
-      precio_venta_usd: parseFloat(formData.get('precioVentaUsd') as string),
-      cantidad_stock: parseInt(formData.get('cantidadStock') as string),
-      talla: formData.get('talla'),
-      categoria: formData.get('categoriaId'),
-      imagen: formData.get('imagen') as string,
+      precio_venta_usd: formData.get('precioVentaUsd') ? parseFloat(formData.get('precioVentaUsd') as string) : null,
+      cantidad_stock: formData.get('cantidadStock') ? parseInt(formData.get('cantidadStock') as string, 10) : null,
+      talla: formData.get('talla') as string | null,
+      categoria: formData.get('categoriaId') as string | null,
+      imagen: formData.get('imagen') as string | null,
     };
 
     const producto = await Producto.findByIdAndUpdate(id, updateData, { new: true })

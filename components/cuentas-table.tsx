@@ -157,7 +157,7 @@ export function CuentasTableComponent() {
   const sortedIngresos = sortCuentas(filterCuentas(ingresos))
   const sortedGastos = sortCuentas(filterCuentas(gastos))
 
-  const convertirACUP = (monto, tasaCambioCUP) => monto * tasaCambioCUP
+  
   const convertirAUSD = (montoCUP) => montoCUP / tasaCambioUSD
 
 

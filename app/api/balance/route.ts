@@ -12,7 +12,7 @@ export async function GET(req: Request) {
 
   try {
     const monedas = await Moneda.find({});
-    const monedaMap = new Map(monedas.map(moneda => [moneda.nombre, moneda]));
+    
 
     // Si es balance diario, obtener cuentas del día
     const cuentas = isDiario

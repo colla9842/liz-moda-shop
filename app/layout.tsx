@@ -1,5 +1,5 @@
 "use client"
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { NavigationBarComponent } from '../components/navigation-bar';
@@ -52,7 +52,7 @@ export default function RootLayout({
     );
   }
 
-  if (pathname.includes('catalog') &&  localStorage.getItem('userLoggedIn') !== 'true' ) {
+  if (pathname.includes('catalog') &&  isLoggedIn !== true ) {
     return (
       <html lang="es">
         

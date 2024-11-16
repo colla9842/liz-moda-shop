@@ -20,7 +20,7 @@ export async function POST(req) {
     console.log('Venta guardada:', nuevaVenta);
 
     // Actualizar el stock de los productos vendidos
-    for (let articulo of articulos) {
+    for (const articulo of articulos) {
       const producto = await Producto.findById(articulo.producto);
       if (producto) {
         // Restar la cantidad vendida del stock

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Eye, EyeOff, Loader, CheckCircle, Import } from 'lucide-react'
+import { Eye, EyeOff, Loader, CheckCircle } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -19,13 +19,15 @@ export function LoginViewComponent() {
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const router = useRouter()
+  
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     setIsLoading(true);
     setError('');
-    localStorage.removeItem('userLoggedIn'); // Eliminar la marca de usuario logueado
-    deleteCookie ('userLoggedIn');
+    localStorage.setItem('userLoggedIn', 'false');
+    setCookie('userLoggedIn', false);
     try {
       const response = await fetch('/api/usuarios/login', {
         method: 'POST',
@@ -50,6 +52,7 @@ export function LoginViewComponent() {
       }
     } catch (error) {
       setError('Ocurrió un error al intentar iniciar sesión');
+      console.log(error);
     } finally {
       setIsLoading(false);
     }

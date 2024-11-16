@@ -27,6 +27,6 @@ export async function POST(req) {
     // Si la contraseña es correcta, retornamos un mensaje de éxito
     return NextResponse.json({ message: 'Login exitoso' }, { status: 200 }); // Paso 7
   } catch (error) {
-    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 }); // Paso 8
+    return NextResponse.json({ error: error.messages }, { status: 500 }); // Paso 8
   }
 }

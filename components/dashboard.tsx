@@ -64,10 +64,10 @@ export function DashboardComponent() {
   }
 
   const calculateProductTotal = (products) => {
-    const usdRate = currencies.find(c => c.nombre === 'USD')?.tasaCambio || 1
+    // const usdRate = currencies.find(c => c.nombre === 'USD')?.tasaCambio || 1
   
     const total = products.reduce((acc, product) => {
-      let price = product.precio_venta_usd - 2
+      const price = product.precio_venta_usd - 2
       return acc + price * product.cantidad_stock
     }, 0)
   
