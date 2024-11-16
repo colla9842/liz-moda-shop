@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
-import Cuenta from '@/models/Cuenta'; // Verifica la ruta del modelo
+import Cuenta from '@/models/Cuenta'; // Asegúrate de que la ruta al modelo sea correcta
 
 // Actualizar una cuenta existente (PUT)
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, context: { params: { id: string } }) {
   await connectToDatabase();
 
   try {
-    const { id } = params;  // Obtén el 'id' de los parámetros de la URL
+    const { id } = context.params; // Acceder al parámetro 'id'
     const updates = await req.json();
     const updatedCuenta = await Cuenta.findByIdAndUpdate(id, updates, { new: true, runValidators: true }).populate('moneda');
 
@@ -23,11 +23,11 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 }
 
 // Eliminar una cuenta existente (DELETE)
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, context: { params: { id: string } }) {
   await connectToDatabase();
 
   try {
-    const { id } = params;  // Obtén el 'id' de los parámetros de la URL
+    const { id } = context.params;  // Acceder al 'id'
     const deletedCuenta = await Cuenta.findByIdAndDelete(id);
 
     if (!deletedCuenta) {
