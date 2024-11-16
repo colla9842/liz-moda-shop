@@ -39,9 +39,6 @@ export async function PUT(request: Request, { params }: { params: { id: string }
   const { id } = params;
   await connectToDatabase();
 
-  // Agregar un log para verificar el tipo de contenido que llega
-  console.log('Content-Type:', request.headers.get('content-type'));
-
   try {
     const formData = await request.formData();
     const updateData: ProductoUpdateData = {
@@ -54,8 +51,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       imagen: formData.get('imagen') as string | null,
     };
 
-    const producto = await Producto.findByIdAndUpdate(id, updateData, { new: true })
-      .populate('categoria');
+    const producto = await Producto.findByIdAndUpdate(id, updateData, { new: true }).populate('categoria');
 
     if (!producto) {
       return NextResponse.json({ error: 'Producto no encontrado' }, { status: 404 });
