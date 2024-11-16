@@ -3,12 +3,12 @@ import { connectToDatabase } from '@/lib/mongodb';
 import Cuenta from '@/models/Cuenta'; // Asegúrate de que la ruta al modelo sea correcta
 
 // Actualizar una cuenta existente (PUT)
-export async function PUT(req: Request, context: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: { id: string } }) {
   await connectToDatabase();
 
   try {
-    const { id } = context.params; // Acceder al parámetro 'id'
-    const updates = await req.json();
+    const { id } = params;  // Obtener el 'id' de los parámetros
+    const updates = await req.json(); // Obtener los datos de la solicitud
     const updatedCuenta = await Cuenta.findByIdAndUpdate(id, updates, { new: true, runValidators: true }).populate('moneda');
 
     if (!updatedCuenta) {
