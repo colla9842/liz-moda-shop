@@ -31,24 +31,24 @@ export async function POST(req: Request) {
 }
 
 // Actualizar parcialmente una cuenta (PATCH)
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
-  await connectToDatabase();
+// export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+//   await connectToDatabase();
 
-  try {
-    const { id } = params;
-    const updates = await req.json();
-    const cuenta = await Cuenta.findByIdAndUpdate(id, updates, { new: true });
+//   try {
+//     const { id } = params;
+//     const updates = await req.json();
+//     const cuenta = await Cuenta.findByIdAndUpdate(id, updates, { new: true });
 
-    if (!cuenta) {
-      return NextResponse.json({ message: 'Cuenta no encontrada' }, { status: 404 });
-    }
+//     if (!cuenta) {
+//       return NextResponse.json({ message: 'Cuenta no encontrada' }, { status: 404 });
+//     }
 
-    return NextResponse.json(cuenta);
-  } catch (error) {
-    console.error('Error al actualizar parcialmente la cuenta:', error);
-    return NextResponse.json({ message: 'Error al actualizar la cuenta', error }, { status: 400 });
-  }
-}
+//     return NextResponse.json(cuenta);
+//   } catch (error) {
+//     console.error('Error al actualizar parcialmente la cuenta:', error);
+//     return NextResponse.json({ message: 'Error al actualizar la cuenta', error }, { status: 400 });
+//   }
+// }
 
 // Actualizar una cuenta existente (PUT)
 export async function PUT(req: Request) {
