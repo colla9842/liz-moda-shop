@@ -78,7 +78,7 @@ export function CuentasTableComponent() {
   const handleEdit = (cuenta) => {
     setEditingId(cuenta._id)
     setEditForm({
-      moneda: cuenta.moneda.nombre,
+      moneda: cuenta.moneda,
       monto: cuenta.monto,
       descripcion: cuenta.descripcion
     })
@@ -86,16 +86,36 @@ export function CuentasTableComponent() {
 
   const handleSave = async (id) => {
     try {
-      await api.put(`/api/cuentas/${id}`, editForm)
-      const updatedCuentas = cuentas.map(cuenta => 
-        cuenta._id === id ? { ...cuenta, ...editForm, moneda: { nombre: editForm.moneda } } : cuenta
-      )
-      setCuentas(updatedCuentas)
-      setEditingId(null)
+        // Paso 1: Hacer la solicitud PUT con los datos en el cuerpo
+        await api.put('/api/cuentas', {
+          id, // Enviamos el id en el cuerpo
+          ...editForm // Incluimos los datos actualizados
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        // Paso 2: Actualizar localmente la lista de cuentas
+        const updatedCuentas = cuentas.map(cuenta => 
+            cuenta._id === id 
+                ? { ...cuenta, ...editForm, moneda: { nombre: editForm.moneda.nombre } } 
+                : cuenta
+        );
+
+        // Paso 3: Actualizar el estado de cuentas
+        setCuentas(updatedCuentas);
+
+        // Paso 4: Resetear el estado de edición
+        setEditingId(null);
+
+        console.log('Cuenta actualizada correctamente');
     } catch (error) {
-      console.error('Error updating account:', error)
+        // Manejo de errores
+        console.error('Error al actualizar la cuenta:', error);
     }
-  }
+};
+
 
   const handleCancel = () => {
     setEditingId(null)
@@ -257,7 +277,7 @@ export function CuentasTableComponent() {
               className="bg-gray-700/50 text-white"
             />
           ) : (
-            cuenta.monto.toFixed(2)
+            cuenta.monto
           )}
         </TableCell>
         <TableCell className="text-gray-300">
@@ -268,7 +288,7 @@ export function CuentasTableComponent() {
               </SelectTrigger>
               <SelectContent className="bg-gray-800 text-white">
                 {monedas.map(moneda => (
-                  <SelectItem key={moneda._id} value={moneda.nombre}>
+                  <SelectItem key={moneda._id} value={moneda}>
                     {moneda.nombre}
                   </SelectItem>
                 ))}
@@ -335,7 +355,7 @@ export function CuentasTableComponent() {
               <TableRow key={moneda} className="border-b border-gray-700">
                 <TableCell className="text-gray-300">{moneda}</TableCell>
                 <TableCell className="text-gray-300">
-                  {data[moneda].monto.toFixed(2)}
+                  {data[moneda].monto}
                 </TableCell>
               </TableRow>
             ))}
