@@ -55,8 +55,9 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   await connectToDatabase();
 
   try {
-    const { id } = params;
-    const updates = await req.json();
+    const { id } = params;  // Desestructuración para obtener el 'id' del parámetro
+    const updates = await req.json();  // Obtener los datos de la solicitud
+
     const updatedCuenta = await Cuenta.findByIdAndUpdate(id, updates, { new: true, runValidators: true }).populate('moneda');
 
     if (!updatedCuenta) {
@@ -69,6 +70,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     return NextResponse.json({ message: 'Error al actualizar la cuenta', error }, { status: 400 });
   }
 }
+
 
 // Eliminar una cuenta existente (DELETE)
 export async function DELETE(req: Request) {
