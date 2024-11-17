@@ -7,12 +7,17 @@ export async function GET() {
   await connectToDatabase();
 
   try {
+    // Define `saldo` with a proper type
     const monedas = await Moneda.find({});
-    const saldo = {};
-    monedas.forEach(moneda => (saldo[moneda.nombre] = 0));
+    const saldo: Record<string, number> = {}; // Use `Record<string, number>` to allow dynamic keys
+
+    // Initialize `saldo` for each currency
+    monedas.forEach(moneda => {
+      saldo[moneda.nombre] = 0;
+    });
 
     const cuentas = await obtenerCuentasDelDia();
-    
+
     cuentas.forEach(cuenta => {
       if (cuenta.tipo === 'Ingreso') {
         saldo[cuenta.moneda.nombre] += cuenta.monto;
