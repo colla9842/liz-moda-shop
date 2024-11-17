@@ -20,9 +20,7 @@ cloudinary.config({
   api_secret: "hoAtCzASC9LgscVgxhvrEJer_wI",
 });
 
-interface Params {
-  id: string; // Adjust the type of `id` as needed (e.g., string or number)
-}
+
 
 // GET method to fetch a product by ID
 export async function GET(request: Request,  params :  Promise<{ id: string }>) {
