@@ -23,8 +23,8 @@ cloudinary.config({
 
 
 // GET method to fetch a product by ID
-export async function GET(request: Request,  params :  Promise<{ id: string }>) {
-  const { id } = await params; // Await params for dynamic API compatibility
+export async function GET(request: Request,  { params }: { params: Promise<{ slug: string }> }) {
+  const id = (await params).slug; // Await params for dynamic API compatibility
   await connectToDatabase();
 
   try {
