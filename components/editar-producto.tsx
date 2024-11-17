@@ -40,6 +40,7 @@ export function EditarProductoComponent() {
   const [categorias, setCategorias] = useState<Array<{ _id: string, nombre: string }>>([])
 
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         const [productoResponse, categoriasResponse] = await Promise.all([
@@ -240,7 +241,10 @@ export function EditarProductoComponent() {
                 onValueChange={(value) => setProducto(prev => ({ ...prev, categoria: value }))}
               >
                 <SelectTrigger className="bg-white/70">
-                  <SelectValue placeholder="Seleccionar categoría" />
+                  <SelectValue placeholder={
+                categorias.find(cat => cat._id === producto.categoria)?.nombre || 
+                "Seleccionar categoría"
+            }  />
                 </SelectTrigger>
                 <SelectContent>
                   {categorias.map(cat => (

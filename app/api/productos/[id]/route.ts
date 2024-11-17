@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
-import Producto from '@/models/Producto'; // Verifica la ruta
+import Producto from '@/models/Producto'; // Verify the path
 import { v2 as cloudinary } from 'cloudinary';
 
 interface ProductoUpdateData {
@@ -13,30 +13,30 @@ interface ProductoUpdateData {
   imagen: string | null;
 }
 
-// Configuración de Cloudinary
+// Cloudinary configuration
 cloudinary.config({
   cloud_name: "du3ycwhmx",
   api_key: "652461147199923",
   api_secret: "hoAtCzASC9LgscVgxhvrEJer_wI",
 });
 
-// Método GET para obtener un producto por ID
-export async function GET(request: Request, { params }: { params: { id: string } }) {
-  const { id } = params;
+// GET method to fetch a product by ID
+export async function GET(request: Request, { params }) {
+  const { id } = await params; // Await params for dynamic API compatibility
   await connectToDatabase();
 
   try {
-    const productos = await Producto.findById(id);
-    return NextResponse.json(productos);
+    const producto = await Producto.findById(id);
+    return NextResponse.json(producto);
   } catch (error) {
-    console.error('Error al obtener productos:', error);
+    console.error('Error fetching product:', error);
     return NextResponse.error();
   }
 }
 
-// Método PUT para actualizar un producto
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
-  const { id } = params;
+// PUT method to update a product
+export async function PUT(request: Request, { params }) {
+  const { id } = await params; // Await params for dynamic API compatibility
   await connectToDatabase();
 
   try {
@@ -51,6 +51,8 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       imagen: formData.get('imagen') as string | null,
     };
 
+console.log(updateData);
+
     const producto = await Producto.findByIdAndUpdate(id, updateData, { new: true }).populate('categoria');
 
     if (!producto) {
@@ -59,14 +61,14 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 
     return NextResponse.json(producto);
   } catch (error) {
-    console.error('Error al actualizar producto:', error);
+    console.error('Error updating product:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 
-// Método DELETE para eliminar un producto
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
-  const { id } = params;
+// DELETE method to delete a product
+export async function DELETE(request: Request, { params }) {
+  const { id } = await params; // Await params for dynamic API compatibility
   await connectToDatabase();
 
   try {
@@ -77,7 +79,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
 
     return NextResponse.json({ message: 'Producto eliminado' });
   } catch (error) {
-    console.error('Error al eliminar producto:', error);
+    console.error('Error deleting product:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
