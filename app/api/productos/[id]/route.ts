@@ -25,7 +25,7 @@ interface Params {
 }
 
 // GET method to fetch a product by ID
-export async function GET({ params }: { params: Params }) {
+export async function GET(request: Request,  params :  Promise<{ id: string }>) {
   const { id } = await params; // Await params for dynamic API compatibility
   await connectToDatabase();
 
@@ -39,7 +39,7 @@ export async function GET({ params }: { params: Params }) {
 }
 
 // PUT method to update a product
-export async function PUT(request: Request, { params }: { params: Params }) {
+export async function PUT(request: Request, { params }) {
   const { id } = await params; // Await params for dynamic API compatibility
   await connectToDatabase();
 
@@ -71,7 +71,7 @@ console.log(updateData);
 }
 
 // DELETE method to delete a product
-export async function DELETE(request: Request, { params }: { params: Params }) {
+export async function DELETE(request: Request, { params }) {
   const { id } = await params; // Await params for dynamic API compatibility
   await connectToDatabase();
 
