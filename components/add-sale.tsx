@@ -324,7 +324,7 @@ export function AddSaleComponent() {
             </div>
 
             <div className="flex space-x-4">
-              <Select name="gestor" onValueChange={(value) => handleChange({ target: { name: 'gestor', value } })} className="flex-grow">
+              <Select name="gestor" onValueChange={(value) => handleChange({ target: { name: 'gestor', value } })} >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecciona un gestor" />
                 </SelectTrigger>
