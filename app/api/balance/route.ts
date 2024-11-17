@@ -19,7 +19,7 @@ export async function GET(req: Request) {
       ? await obtenerCuentasDelDia()
       : await Cuenta.find({}).populate('moneda'); // Si no, obtener todas las cuentas
 
-    const saldo = {};
+    const saldo: Record<string, number> = {}; // Use `Record<string, number>` to allow dynamic keys
     monedas.forEach(moneda => (saldo[moneda.nombre] = 0));
 
     cuentas.forEach(cuenta => {
