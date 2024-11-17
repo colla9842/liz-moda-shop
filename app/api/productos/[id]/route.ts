@@ -20,8 +20,12 @@ cloudinary.config({
   api_secret: "hoAtCzASC9LgscVgxhvrEJer_wI",
 });
 
+interface Params {
+  id: string; // Adjust the type of `id` as needed (e.g., string or number)
+}
+
 // GET method to fetch a product by ID
-export async function GET(request: Request, { params }) {
+export async function GET(request: Request, { params }: { params: Params }) {
   const { id } = await params; // Await params for dynamic API compatibility
   await connectToDatabase();
 
@@ -35,7 +39,7 @@ export async function GET(request: Request, { params }) {
 }
 
 // PUT method to update a product
-export async function PUT(request: Request, { params }) {
+export async function PUT(request: Request, { params }: { params: Params }) {
   const { id } = await params; // Await params for dynamic API compatibility
   await connectToDatabase();
 
@@ -67,7 +71,7 @@ console.log(updateData);
 }
 
 // DELETE method to delete a product
-export async function DELETE(request: Request, { params }) {
+export async function DELETE(request: Request, { params }: { params: Params }) {
   const { id } = await params; // Await params for dynamic API compatibility
   await connectToDatabase();
 
