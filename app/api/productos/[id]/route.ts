@@ -25,7 +25,7 @@ interface Params {
 }
 
 // GET method to fetch a product by ID
-export async function GET(request: Request, params: Params ) {
+export async function GET({ params }: { params: Params }) {
   const { id } = await params; // Await params for dynamic API compatibility
   await connectToDatabase();
 
