@@ -44,7 +44,11 @@ export function CuentasTableComponent() {
   const [currentPage, setCurrentPage] = useState(0)
   const [searchTerm, setSearchTerm] = useState('')
   const [editingId, setEditingId] = useState(null)
-  const [editForm, setEditForm] = useState({})
+  const [editForm, setEditForm] = useState({
+    monto: 0, // Valor por defecto para el monto
+    moneda: monedas[0] || {}, // La primera moneda de la lista o un objeto vacío
+    descripcion: '', // Valor por defecto para la descripción
+  })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -119,8 +123,14 @@ export function CuentasTableComponent() {
 
   const handleCancel = () => {
     setEditingId(null)
-    setEditForm({})
+    setEditForm({
+      monto: 0, // Valor por defecto para el monto
+      moneda: monedas[0] || {}, // La primera moneda de la lista o un objeto vacío
+      descripcion: '', // Valor por defecto para la descripción
+    })
   }
+
+  
 
   const handleDelete = async (id) => {
     try {
