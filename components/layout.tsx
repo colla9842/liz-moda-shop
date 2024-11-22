@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavigationBarComponent } from './NavigationBarComponent'
+import { NavigationBarComponent } from './navigation-bar'
 
 const Layout = ({ children }) => {
   const [showNavBar, setShowNavBar] = useState(true)
