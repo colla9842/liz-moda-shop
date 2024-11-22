@@ -59,7 +59,7 @@ export function EditarProductoComponent() {
     fetchData()
   }, [id])
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target
     setProducto(prevState => ({
       ...prevState,
@@ -67,13 +67,13 @@ export function EditarProductoComponent() {
     }))
   }
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setImagenFile(e.target.files[0])
     }
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     setAlertMessage('')
