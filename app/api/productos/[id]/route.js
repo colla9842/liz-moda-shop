@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabase } from '../../../../lib/mongodb';
-import Producto from '../../../../models/producto'; // Verifica la ruta
+import { connectToDatabase } from '@/lib/mongodb';
+import Producto from '@/models/Producto';
 import { v2 as cloudinary } from 'cloudinary';
 
 // Configuración de Cloudinary
@@ -11,7 +11,7 @@ cloudinary.config({
 });
 
 // Método GET para obtener un producto por ID
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request, { params }) {
   const { id } = params;
   await connectToDatabase();
 
@@ -25,7 +25,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
 }
 
 // Método PUT para actualizar un producto
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(request, { params }) {
   const { id } = params;
   await connectToDatabase();
 
@@ -34,14 +34,14 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 
   try {
     const formData = await request.formData();
-    const updateData: any = {
+    const updateData = {
       nombre: formData.get('nombre'),
       descripcion: 'Prenda',
-      precio_venta_usd: parseFloat(formData.get('precioVentaUsd') as string),
-      cantidad_stock: parseInt(formData.get('cantidadStock') as string),
+      precio_venta_usd: parseFloat(formData.get('precioVentaUsd')),
+      cantidad_stock: parseInt(formData.get('cantidadStock')),
       talla: formData.get('talla'),
       categoria: formData.get('categoriaId'),
-      imagen: formData.get('imagen') as string,
+      imagen: formData.get('imagen'),
     };
 
     const producto = await Producto.findByIdAndUpdate(id, updateData, { new: true })
@@ -59,7 +59,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 }
 
 // Método DELETE para eliminar un producto
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request, { params }) {
   const { id } = params;
   await connectToDatabase();
 
