@@ -9,7 +9,7 @@ export async function connectToDatabase() {
     return;
   }
 
-  const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gabrielsimoncollazo:MongoGsc2022!@cluster0.l3txlc8.mongodb.net/mi_base_de_datos?retryWrites=true&w=majority';
+  const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://gabrielsimoncollazo:MongoGsc2022!@cluster0.l3txlc8.mongodb.net/test?retryWrites=true&w=majority';
 
   if (!MONGODB_URI) {
     throw new Error('La URI de MongoDB no está definida');
