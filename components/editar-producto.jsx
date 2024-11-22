@@ -24,7 +24,7 @@ export function EditarProductoComponent() {
   const { id } = useParams()
   const router = useRouter()
   const [alertMessage, setAlertMessage] = useState('')
-  const [alertType, setAlertType] = useState<'success' | 'error'>('success')
+  const [alertType, setAlertType] = useState('success')
   const [producto, setProducto] = useState({
     nombre: '',
     descripcion: '',
@@ -35,12 +35,11 @@ export function EditarProductoComponent() {
     imagen: '',
     categoria: ''
   })
-  const [imagenFile, setImagenFile] = useState<File | null>(null)
+  const [imagenFile, setImagenFile] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [categorias, setCategorias] = useState<Array<{ _id: string, nombre: string }>>([])
+  const [categorias, setCategorias] = useState([])
 
   useEffect(() => {
-    
     const fetchData = async () => {
       try {
         const [productoResponse, categoriasResponse] = await Promise.all([
@@ -124,7 +123,6 @@ export function EditarProductoComponent() {
         setLoading(false)
     }
 }
-
 
   const handleCancel = () => {
     router.push('/editar-producto')
@@ -274,3 +272,4 @@ export function EditarProductoComponent() {
     </div>
   )
 }
+
