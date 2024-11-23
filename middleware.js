@@ -21,6 +21,6 @@ export function middleware(req) {
 // El middleware se aplica a todas las rutas especificadas en el matcher
 export const config = {
     matcher: ['/','/cuentas','/api/cuentas','/api/balance','/api/gestores','/api/usuarios','/reporte_mensual','/gasto_categoria','/venta',
-        '/ingreso_extra','/gastos','/cambio','/addProduct','/editar-producto'
+        '/ingreso_extra','/gastos','/cambio','/addProduct','/editar-producto','/dashboard'
     ], // Asegura que el middleware se aplique a las rutas especificadas
 };
