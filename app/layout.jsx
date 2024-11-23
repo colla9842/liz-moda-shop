@@ -46,7 +46,8 @@ export default function RootLayout({ children, }) {
     return (<html lang="en">
       <Head>
         {/* Cambiamos el favicon para usar tu propio logo */}
-        <link rel="icon" href="/logo.jpg" type="image/jpg"/>
+        
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {/* Fondo con imagen */}
