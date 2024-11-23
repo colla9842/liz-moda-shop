@@ -19,6 +19,9 @@ export function ProductCatalogComponent() {
     const [loading, setLoading] = useState(true);
     const [imageError, setImageError] = useState({});
     useEffect(() => {
+      console.log('Catalog visited');
+      console.log('User Logged In (localStorage):', localStorage.getItem('userLoggedIn'));
+      console.log('User Logged In (cookie):', document.cookie);
         const fetchData = async () => {
             try {
                 const productsResponse = await axios.get(`${API_BASE_URL}/api/productos`);

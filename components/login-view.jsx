@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Loader, CheckCircle } from 'lucide-react';
 import { Button } from "./ui/button";
@@ -17,6 +17,13 @@ export function LoginViewComponent() {
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const router = useRouter();
+    
+    useEffect(() => {
+      console.log('User Logged In (localStorage):', localStorage.getItem('userLoggedIn'));
+      console.log('User Logged In (cookie):', document.cookie);
+  }, []);
+  
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);

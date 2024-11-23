@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 import Usuario from './../../../../models/Usuario'; // Modelo de usuario
+import { connectToDatabase }  from './../../../../lib/mongodb'
 import bcrypt from 'bcryptjs'; // Para comparar contraseñas
 // Este es el controlador POST para el login
 export async function POST(req) {
     try {
+        await connectToDatabase();
         const { correo_electronico, contrasena } = await req.json(); // Paso 1
         // Validamos si los campos están vacíos
         if (!correo_electronico || !contrasena) {
