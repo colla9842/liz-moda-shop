@@ -1,9 +1,6 @@
 import { NavigationBarComponent } from '../../components/navigation-bar';
-
 export default function LoginPage() {
-  return (
-    <main>
+    return (<main>
         <NavigationBarComponent />   
-    </main>
-  );
+    </main>);
 }

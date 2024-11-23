@@ -1,9 +1,6 @@
 import { CloudinaryUploaderComponent } from '../../components/cloudinary-uploader';
-
 export default function LoginPage() {
-  return (
-    <main>
+    return (<main>
         <CloudinaryUploaderComponent />   
-    </main>
-  );
+    </main>);
 }

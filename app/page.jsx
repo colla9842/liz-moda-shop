@@ -1,9 +1,6 @@
 import { DashboardComponent } from '../components/dashboard';
-
 export default function LoginPage() {
-  return (
-    <main>
+    return (<main>
         <DashboardComponent />
-    </main>
-  );
+    </main>);
 }

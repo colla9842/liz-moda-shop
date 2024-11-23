@@ -1,9 +1,6 @@
 import { AddSaleComponent } from '../../components/add-sale';
-
 export default function LoginPage() {
-  return (
-    <main>
+    return (<main>
         <AddSaleComponent />   
-    </main>
-  );
+    </main>);
 }

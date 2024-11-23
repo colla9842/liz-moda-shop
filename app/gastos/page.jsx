@@ -1,9 +1,6 @@
 import { AddExpenseComponent } from '../../components/add-expense';
-
 export default function LoginPage() {
-  return (
-    <main>
+    return (<main>
         <AddExpenseComponent />   
-    </main>
-  );
+    </main>);
 }

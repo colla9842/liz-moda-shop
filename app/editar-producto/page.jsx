@@ -1,9 +1,6 @@
 import { ProductCatalogEditionComponent } from '../../components/product-catalog-edition';
-
 export default function LoginPage() {
-  return (
-    <main>
+    return (<main>
         <ProductCatalogEditionComponent />   
-    </main>
-  );
+    </main>);
 }

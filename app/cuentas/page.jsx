@@ -1,9 +1,6 @@
 import { CuentasTableComponent } from '../../components/cuentas-table';
-
 export default function LoginPage() {
-  return (
-    <main>
+    return (<main>
         <CuentasTableComponent />
-    </main>
-  );
+    </main>);
 }

@@ -1,9 +1,6 @@
 import { MonthlyReportComponent } from '../../components/monthly-report';
-
 export default function LoginPage() {
-  return (
-    <main>
+    return (<main>
         <MonthlyReportComponent />   
-    </main>
-  );
+    </main>);
 }
