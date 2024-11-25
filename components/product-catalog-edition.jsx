@@ -141,9 +141,10 @@ export function ProductCatalogEditionComponent() {
       <Modal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)}>
         <h2 className="text-xl font-bold mb-4">Confirmar eliminación</h2>
         <p className="mb-4">
-          ¿Estás seguro de que quieres eliminar el producto "{productToDelete?.nombre}"?
-          Esta acción no se puede deshacer.
-        </p>
+  ¿Estás seguro de que quieres eliminar el producto &quot;{productToDelete?.nombre}&quot;?
+  Esta acción no se puede deshacer.
+</p>
+
         <div className="flex justify-end space-x-4">
           <button 
             onClick={() => setIsDeleteModalOpen(false)}
