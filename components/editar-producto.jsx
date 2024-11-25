@@ -57,6 +57,15 @@ export function EditarProductoComponent() {
         fetchData();
     }, [id]);
 
+    useEffect(() => {
+      if (productoOriginal && categorias.length > 0) {
+          const categoriaExistente = categorias.find(cat => cat._id === productoOriginal.categoria);
+          if (categoriaExistente) {
+              setProducto(prevState => ({ ...prevState, categoria: productoOriginal.categoria }));
+          }
+      }
+  }, [productoOriginal, categorias]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProducto(prevState => ({ ...prevState, [name]: value }));
@@ -179,16 +188,22 @@ export function EditarProductoComponent() {
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="categoria">Categoría:</Label>
-                            <Select value={producto.categoria} onValueChange={(value) => setProducto(prev => ({ ...prev, categoria: value }))}>
-                                <SelectTrigger className="bg-white/70">
-                                    <SelectValue placeholder={categorias.find(cat => cat._id === producto.categoria)?.nombre } />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {categorias.map(cat => (
-                                        <SelectItem key={cat._id} value={cat._id}>{cat.nombre}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                            <Select
+                    value={producto.categoria}
+                    onValueChange={(value) => setProducto(prev => ({ ...prev, categoria: value }))}
+                >
+                    <SelectTrigger>
+                        <SelectValue placeholder="Seleccionar categoría" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {categorias.map(cat => (
+                            <SelectItem key={cat._id} value={cat._id}>
+                                {cat.nombre}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
+
                         </div>
                         <div className="flex justify-between">
                             <Button type="button" variant="outline" onClick={handleCancel}>
