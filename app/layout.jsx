@@ -6,6 +6,8 @@ import { NavigationBarComponent } from '../components/navigation-bar';
 import Head from "next/head"; // Importar para modificar el head
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation'; // Para navegar en Next.js
+import { ToastProvider } from './../components/ui/use-toast'
+import { Toaster } from './../components/ui/Toaster'
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -51,6 +53,7 @@ export default function RootLayout({ children, }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+
         {/* Fondo con imagen */}
         <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')" }}>
           {/* Hacemos el navbar fijo */}
@@ -63,12 +66,17 @@ export default function RootLayout({ children, }) {
         }}>
             <NavigationBarComponent />
           </div>
-          
+          <ToastProvider>
           {/* Ajustamos el padding-top para evitar que el contenido se superponga con el navbar */}
           <main style={{ paddingTop: '60px' }}>
+           
             {children}
           </main>
+          <Toaster />
+        </ToastProvider>
         </div>
+
+
       </body>
     </html>);
 }

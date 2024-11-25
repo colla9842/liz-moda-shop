@@ -14,6 +14,7 @@ export function DashboardComponent() {
     const [totalUSD, setTotalUSD] = useState(0);
     const [dailyTotalUSD, setDailyTotalUSD] = useState(0);
     const [productTotal, setProductTotal] = useState(0);
+    const [productCount, setProductCount] = useState(0);
     const [sortColumn, setSortColumn] = useState('');
     const [sortDirection, setSortDirection] = useState('asc');
     const [filter, setFilter] = useState('');
@@ -63,7 +64,11 @@ export function DashboardComponent() {
             const price = product.precio_venta_usd - 2;
             return acc + price * product.cantidad_stock;
         }, 0);
+
+        const totalCount = products.reduce((acc, product) => acc + product.cantidad_stock, 0); // Sumar cantidad de productos
+
         setProductTotal(total);
+        setProductCount(totalCount); // Actualizar cantidad total
     };
     const usdRate = ((_a = currencies.find(c => c.nombre === 'USD')) === null || _a === void 0 ? void 0 : _a.tasaCambio) || 1;
     const mlcRate = ((_b = currencies.find(c => c.nombre === 'MLC')) === null || _b === void 0 ? void 0 : _b.tasaCambio) || 1;
@@ -122,7 +127,7 @@ export function DashboardComponent() {
           {[
             { title: "Total en USD", value: totalUSD, icon: DollarSign },
             { title: "Balance Diario en USD", value: dailyTotalUSD, icon: TrendingUp },
-            { title: "Total en Productos", value: productTotal, icon: Package },
+            { title: "Total en Productos", value: `$${productTotal}  Cantidad: ${productCount}` , icon: Package },
             { title: "Tasas de Cambio", value: `USD: ${usdRate} | MLC: ${mlcRate}`, icon: RefreshCcw },
         ].map((item, index) => (<Card key={index} className="bg-white/70 backdrop-blur-md border-none shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
