@@ -225,7 +225,7 @@ export function NavigationBarComponent() {
                         handleLogout();
                         closeMenu();
                       }}
-                      className="flex items-center space-x-2 text-red-400 hover:text-red-300"
+                      className="flex items-center space-x-2 text-white hover:text-red-300"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
