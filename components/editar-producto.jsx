@@ -143,15 +143,15 @@ export function EditarProductoComponent() {
                             <Label htmlFor="nombre">Nombre:</Label>
                             <Input id="nombre" name="nombre" value={producto.nombre} onChange={handleChange} className="bg-white/70" />
                         </div>
-                        <div className="space-y-2">
+                        {/* <div className="space-y-2">
                             <Label htmlFor="descripcion">Descripción:</Label>
                             <Input id="descripcion" name="descripcion" value={producto.descripcion} onChange={handleChange} className="bg-white/70" />
-                        </div>
+                        </div> */}
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2">
+                            {/* <div className="space-y-2">
                                 <Label htmlFor="precio_compra_usd">Precio Compra USD:</Label>
                                 <Input id="precio_compra_usd" name="precio_compra_usd" type="number" value={producto.precio_compra_usd} onChange={handleChange} className="bg-white/70" />
-                            </div>
+                            </div> */}
                             <div className="space-y-2">
                                 <Label htmlFor="precio_venta_usd">Precio Venta USD:</Label>
                                 <Input id="precio_venta_usd" name="precio_venta_usd" type="number" value={producto.precio_venta_usd} onChange={handleChange} className="bg-white/70" />
