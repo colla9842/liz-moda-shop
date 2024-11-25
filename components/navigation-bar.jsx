@@ -163,7 +163,7 @@ export function NavigationBarComponent() {
               <Button
                 onClick={handleLogout}
                 variant="ghost"
-                className="text-white-400 hover:text-white-300 hover:bg-white/10"
+                className="text-white hover:text-red-300 hover:bg-white/10"
               >
                 <LogOut className="w-5 h-5 mr-2" />
                 Cerrar Sesión
