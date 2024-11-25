@@ -180,7 +180,7 @@ export function EditarProductoComponent() {
                             <Label htmlFor="categoria">Categoría:</Label>
                             <Select value={producto.categoria} onValueChange={(value) => setProducto(prev => ({ ...prev, categoria: value }))}>
                                 <SelectTrigger className="bg-white/70">
-                                    <SelectValue placeholder={categorias.find(cat => cat._id === producto.categoria)?.nombre || "Seleccionar categoría"} />
+                                    <SelectValue placeholder={categorias.find(cat => cat._id === producto.categoria)?.nombre } />
                                 </SelectTrigger>
                                 <SelectContent>
                                     {categorias.map(cat => (
