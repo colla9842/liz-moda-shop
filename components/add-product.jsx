@@ -46,7 +46,7 @@ export function AddProductComponent() {
             return { nombre: 'Otros', _id: '6482f3a3c6f84d3c6226df4d' };
         const searchTerm = input.split(' ')[0].toLowerCase();
         let closestCategory = categories.find(cat => cat.nombre === 'Otros');
-        let minDistance = Infinity;
+        let minDistance = 3;
         categories.forEach(category => {
             const distance = calculateLevenshteinDistance(searchTerm, category.nombre.toLowerCase());
             if (distance < minDistance) {
@@ -56,6 +56,10 @@ export function AddProductComponent() {
         });
         return minDistance <= 3 ? closestCategory : categories.find(cat => cat.nombre === 'Otros');
     };
+
+    const formatInput = (value) => {
+      return value.replace(/^0+/, '');
+  };
     const calculateLevenshteinDistance = (a, b) => {
         const matrix = [];
         for (let i = 0; i <= b.length; i++) {
@@ -128,6 +132,8 @@ export function AddProductComponent() {
             setImagen(null);
             setCategoria('Otros');
             setCategoriaId('6482f3a3c6f84d3c6226df4d');
+
+            
         }
         catch (error) {
             console.error('Error al agregar producto:', error);
@@ -174,11 +180,11 @@ export function AddProductComponent() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="precioVentaUsd">Precio Venta (USD):</Label>
-                <Input id="precioVentaUsd" type="number" step="0.01" value={precioVentaUsd} onChange={(e) => setPrecioVentaUsd(Number(e.target.value))} required className="bg-white/70"/>
+                <Input id="precioVentaUsd" type="number" step="1" value={precioVentaUsd} onChange={(e) => setPrecioVentaUsd(formatInput(e.target.value))} required className="bg-white/70"/>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="cantidadStock">Cantidad en Stock:</Label>
-                <Input id="cantidadStock" type="number" value={cantidadStock} onChange={(e) => setCantidadStock(Number(e.target.value))} required className="bg-white/70"/>
+                <Input id="cantidadStock" type="number" value={cantidadStock} onChange={(e) => setCantidadStock(Number(e.target.value))} required className="bg-white/70" min="1"/>
               </div>
             </div>
             <div className="space-y-2">
