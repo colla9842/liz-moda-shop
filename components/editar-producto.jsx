@@ -81,47 +81,46 @@ export function EditarProductoComponent() {
         e.preventDefault();
         setLoading(true);
         setAlertMessage('');
-    
         try {
             let imageUrl = producto.imagen;
-    
-            // Si hay un archivo de imagen, súbelo a Cloudinary
             if (imagenFile) {
                 const formData = new FormData();
                 formData.append('file', imagenFile);
                 formData.append('upload_preset', UPLOAD_PRESET);
-    
                 const cloudinaryResponse = await fetch(CLOUDINARY_URL, {
                     method: 'POST',
                     body: formData,
                 });
-    
                 if (!cloudinaryResponse.ok) {
                     throw new Error('Error al subir la imagen a Cloudinary');
                 }
-    
                 const cloudinaryData = await cloudinaryResponse.json();
                 imageUrl = cloudinaryData.secure_url;
             }
-    
-            // Comparar los datos modificados y preparar FormData
-            const formData = new FormData();
-            Object.keys(producto).forEach((key) => {
+
+            // Comparar los datos modificados
+            const form = new FormData();
+            const camposModificados = Object.keys(producto).reduce((acc, key) => {
                 if (producto[key] !== productoOriginal[key]) {
                     const value = key === 'imagen' ? imageUrl : producto[key];
-                    formData.append(key, value);
+                    form.append(key, value);
+                    acc[key] = key === 'imagen' ? imageUrl : producto[key];
+
                 }
-            });
-    
+                return acc;
+            }, {});
+
             
-    
-            // Enviar los datos modificados al backend
-            const response = await api.put(`/api/productos/${id}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-    
+            // Verificar si hay cambios
+            if (Object.keys(camposModificados).length === 0) {
+                setAlertMessage('No se realizaron cambios en el producto');
+                setAlertType('info');
+                setLoading(false);
+                return;
+            }
+
+            // Enviar solo los datos modificados
+            const response = await api.put(`/api/productos/${id}`, form);
             console.log('Producto actualizado:', response.data);
             setAlertMessage('Producto actualizado exitosamente');
             setAlertType('success');
@@ -134,7 +133,6 @@ export function EditarProductoComponent() {
             setLoading(false);
         }
     };
-    
 
     const handleCancel = () => {
         router.push('/editar-producto');
