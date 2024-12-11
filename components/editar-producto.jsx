@@ -113,13 +113,7 @@ export function EditarProductoComponent() {
                 }
             });
     
-            // Verificar si hay cambios
-            if (!formData.has('imagen') && !formData.entries().next().done) {
-                setAlertMessage('No se realizaron cambios en el producto');
-                setAlertType('info');
-                setLoading(false);
-                return;
-            }
+            
     
             // Enviar los datos modificados al backend
             const response = await api.put(`/api/productos/${id}`, formData, {
