@@ -112,6 +112,7 @@ export function EditarProductoComponent() {
                     const value = key === 'imagen' ? imageUrl : producto[key];
                     form.append(key, value);
                     acc[key] = key === 'imagen' ? imageUrl : producto[key];
+                    console.log(producto[key]);
 
                 }
                 return acc;
