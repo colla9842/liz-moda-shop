@@ -73,8 +73,9 @@ export function EditarProductoComponent() {
 
     const handlePrecio = (e) => {
         const { name, value } = e.target;
-        const precio = 
-        setProducto(prevState => ({ ...prevState, precio_venta_usd: parseInt(value) }));
+        const precio = parseInt(value);
+        console.log("precio nuevo> " + precio)
+        setProducto(prevState => ({ ...prevState, precio_venta_usd: precio }));
     }
 
     const handleFileChange = (e) => {
