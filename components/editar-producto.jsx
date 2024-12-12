@@ -71,6 +71,12 @@ export function EditarProductoComponent() {
         setProducto(prevState => ({ ...prevState, [name]: value }));
     };
 
+    const handlePrecio = (e) => {
+        const { name, value } = e.target;
+        const precio = 
+        setProducto(prevState => ({ ...prevState, precio_venta_usd: parseInt(value) }));
+    }
+
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
             setImagenFile(e.target.files[0]);
@@ -169,7 +175,7 @@ export function EditarProductoComponent() {
                             </div> */}
                             <div className="space-y-2">
                                 <Label htmlFor="precio_venta_usd">Precio Venta USD:</Label>
-                                <Input id="precio_venta_usd" name="precio_venta_usd" type="number" value={producto.precio_venta_usd} onChange={handleChange} className="bg-white/70" />
+                                <Input id="precio_venta_usd" name="precio_venta_usd" type="number" value={producto.precio_venta_usd} onChange={handlePrecio} className="bg-white/70" />
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
