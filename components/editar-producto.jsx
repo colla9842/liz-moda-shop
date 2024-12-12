@@ -80,11 +80,12 @@ export function EditarProductoComponent() {
     };
 
     const handleSubmit = async (e) => {
+        let imagencambiada = false;
         e.preventDefault();
         setLoading(true);
         setAlertMessage('');
         try {
-            let imageUrl = producto.imagen;
+             let imageUrl = producto.imagen;
             if (imagenFile) {
                 const formData = new FormData();
                 formData.append('file', imagenFile);
@@ -98,11 +99,14 @@ export function EditarProductoComponent() {
                 }
                 const cloudinaryData = await cloudinaryResponse.json();
                 imageUrl = cloudinaryData.secure_url;
+                console.log("Link de la foto> "+imageUrl)
+                imagencambiada = true;
             }
 
             // Comparar los datos modificados
             const form = new FormData();
             form.append("_id", productoOriginal.id)
+            form.append('imagen', imageUrl)
             const camposModificados = Object.keys(producto).reduce((acc, key) => {
                 if (producto[key] !== productoOriginal[key]) {
                     
@@ -129,7 +133,7 @@ export function EditarProductoComponent() {
             
             
             // Verificar si hay cambios
-            if (Object.keys(camposModificados).length === 0) {
+            if (Object.keys(camposModificados).length === 0 && !imagencambiada) {
                 setAlertMessage('No se realizaron cambios en el producto');
                 setAlertType('info');
                 setLoading(false);
