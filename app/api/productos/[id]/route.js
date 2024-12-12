@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { connectToDatabase } from './../../../../lib/mongodb'; // Asegúrate de que esta ruta sea válida
 import Producto from './../../../../models/Producto'; // Asegúrate de que esta ruta sea válida
+import './../../../../models/Categoria'
 import mongoose from 'mongoose';
 
 export async function GET(request, { params }) {
