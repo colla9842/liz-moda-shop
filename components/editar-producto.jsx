@@ -113,9 +113,13 @@ export function EditarProductoComponent() {
                     form.append(key, value);
                     acc[key] = key === 'imagen' ? imageUrl : producto[key];
                     console.log(producto[key]);
+                    
 
                 }
+                console.log(form);
                 return acc;
+
+               
             }, {});
 
             
