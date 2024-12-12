@@ -71,12 +71,7 @@ export function EditarProductoComponent() {
         setProducto(prevState => ({ ...prevState, [name]: value }));
     };
 
-    const handlePrecio = (e) => {
-        const { name, value } = e.target;
-        const precio = parseInt(value);
-        console.log("precio nuevo> " + precio)
-        setProducto(prevState => ({ ...prevState, precio_venta_usd: precio }));
-    }
+    
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -107,21 +102,31 @@ export function EditarProductoComponent() {
 
             // Comparar los datos modificados
             const form = new FormData();
+            form.append("_id", productoOriginal.id)
             const camposModificados = Object.keys(producto).reduce((acc, key) => {
                 if (producto[key] !== productoOriginal[key]) {
-                    const value = key === 'imagen' ? imageUrl : producto[key];
-                    form.append(key, value);
-                    acc[key] = key === 'imagen' ? imageUrl : producto[key];
-                    console.log(producto[key]);
                     
-
+                    acc[key] = key === 'imagen' ? imageUrl : producto[key];
+                    
+                    console.log("Key: " + key)
+                    console.log("Value: " + producto[key])
+                    
+                    form.append(key, parseInt(producto[key]));
                 }
-                console.log(form);
+                else{
+                    form.append(key,productoOriginal[key]);
+                }
+                
                 return acc;
 
                
             }, {});
 
+            const obj = {}; form.forEach((value, key) => { obj[key] = value; }); console.log(JSON.stringify(obj, null, 2));
+
+           
+
+            
             
             // Verificar si hay cambios
             if (Object.keys(camposModificados).length === 0) {
@@ -181,7 +186,7 @@ export function EditarProductoComponent() {
                             </div> */}
                             <div className="space-y-2">
                                 <Label htmlFor="precio_venta_usd">Precio Venta USD:</Label>
-                                <Input id="precio_venta_usd" name="precio_venta_usd" type="number" value={producto.precio_venta_usd} onChange={handlePrecio} className="bg-white/70" />
+                                <Input id="precio_venta_usd" name="precio_venta_usd" type="number" value={producto.precio_venta_usd} onChange={handleChange} className="bg-white/70" />
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">

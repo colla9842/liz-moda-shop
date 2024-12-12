@@ -60,10 +60,10 @@ export async function PUT(request, { params }) {
       const updateData = {
         nombre: formData.get('nombre'),
         descripcion: 'Prenda',
-        precio_venta_usd: parseFloat(formData.get('precioVentaUsd')),
-        cantidad_stock: parseInt(formData.get('cantidadStock') ),
+        precio_venta_usd: parseFloat(formData.get('precio_venta_usd')),
+        cantidad_stock: parseInt(formData.get('cantidad_stock') ),
         talla: formData.get('talla'),
-        categoria: formData.get('categoriaId'),
+        categoria: formData.get('categoria'),
         imagen: formData.get('imagen'),
       };
   
